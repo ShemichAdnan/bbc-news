@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaPlus } from "react-icons/fa";
+import Popalert from "./Popalert";
 const Content = () => {
   let first = {
     subject: "Frenchman planned attacks in Euro 2016",
@@ -38,19 +39,76 @@ const Content = () => {
   };
 
   let started = [first, second, third, fourth, fifth];
+
+  const [visible, setVisible] = useState(false);
   const [news, setNews] = useState(started);
-  const Update = () => {
-    let added = {
-        subject: "Nesto novoooo",
-        description: "Nova igrica je dodana na steamu",
-        category: "Gaming",
-        picture: "https://storage.googleapis.com/pod_public/750/168838.jpg",
-      };
-      setNews([added,...news]);
-      return;
+  const [input, setInput] = useState({
+    subject: "",
+    description: "",
+    category: "",
+    picture: "",
+  });
+  const addingNew = () => {
+    setInput({
+      subject: input.subject,
+      description: input.description,
+      category: input.category,
+      picture: input.picture,
+    });
+
+    setNews([input, ...news]);
+    setVisible(false);
+  };
+
+  const handleInputChange = (event: any) => {
+    const { id, value } = event.target; // Uzima id i vrijednost iz event.target
+    setInput((prevValues) => ({
+      ...prevValues,
+      [id]: value, // Ažurira odgovarajući ključ u objektu
+    }));
   };
   return (
     <div id="content">
+      {visible && (
+        <div id="popalert">
+          <div id="box">
+            <h1>Add news</h1>
+            <label htmlFor="subject">Subject: </label>
+            <input
+              type="text"
+              id="subject"
+              max={40}
+              value={input.subject}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="description">Description: </label>
+            <input
+              type="text"
+              id="description"
+              max={80}
+              value={input.description}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="category">Category: </label>
+            <input
+              type="text"
+              id="category"
+              max={25}
+              value={input.category}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="picture">Picture: </label>
+            <input
+              type="text"
+              id="picture"
+              value={input.picture}
+              onChange={handleInputChange}
+            />
+            <button onClick={() => addingNew()}>Add</button>
+          </div>
+        </div>
+      )}
+
       <div
         id="first"
         style={{
@@ -123,7 +181,9 @@ const Content = () => {
           </div>
         </div>
       </div>
-      <button onClick={Update} style={{width:"5%"}}><FaPlus /></button>
+      <button onClick={() => setVisible(true)} style={{ width: "5%" }}>
+        <FaPlus />
+      </button>
     </div>
   );
 };
