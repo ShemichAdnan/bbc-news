@@ -1,8 +1,13 @@
 import "./App.css";
 import Header from "./components/Header";
-
+import Showcase from "./components/Showcase";
 function App() {
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <Showcase />
+    </>
+  );
 }
 
 export default App;

@@ -16,9 +16,11 @@ body{
   color: white;
   width: 100%;
 }
-#header .cut{
+.cut{
   width: 90%;
   margin: auto;
+}
+#header .cut{
   display: flex;
   align-items: center;
   height: 100%;
@@ -81,4 +83,72 @@ body{
   background-color: lightgray;
   color: black;
   cursor: pointer;
+}
+#showcase{
+  background-color: bisque;
+  height: 700px;
+}
+#showcase #messages{
+  padding-top: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+#showcase #content{
+  height: 400px;
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  margin-top: 15px;
+}
+#showcase #first{
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 20px;
+  gap: 10px;
+  width: 50%;
+}
+#showcase #content #right{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 50%;
+}
+#showcase #frow{
+  display: flex;
+  gap: 15px;
+  height: 50%;
+}
+#showcase #second,#showcase #third{
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 15px;
+  font-size: 10px;
+  background-color: yellow;
+  width: 50%;
+  gap: 5px;
+}
+
+#showcase #srow{
+  display: flex;
+  gap: 15px;
+  height: 50%;
+}
+#showcase #fourth,#showcase #fifth{
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 15px;
+  font-size: 10px;
+  background-color: yellow;
+  width: 50%;
+  gap: 5px;
+}
+
+#showcase #content h1{
+  color: white;
+}
+#showcase #content h3{
+  color: rgb(210, 210, 210);
 }
