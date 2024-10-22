@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { FaPlus } from "react-icons/fa";
-import Popalert from "./Popalert";
+
 const Content = () => {
   let first = {
     subject: "Frenchman planned attacks in Euro 2016",
@@ -55,16 +55,23 @@ const Content = () => {
       category: input.category,
       picture: input.picture,
     });
-
-    setNews([input, ...news]);
-    setVisible(false);
+    if (
+      input.subject != "" &&
+      input.description != "" &&
+      input.category != "" &&
+      input.picture != ""
+    ) {
+      setNews([input, ...news]);
+      setVisible(false);
+      input.subject=""
+    }
   };
 
   const handleInputChange = (event: any) => {
-    const { id, value } = event.target; // Uzima id i vrijednost iz event.target
+    const { id, value } = event.target;
     setInput((prevValues) => ({
       ...prevValues,
-      [id]: value, // Ažurira odgovarajući ključ u objektu
+      [id]: value,
     }));
   };
   return (
@@ -77,23 +84,26 @@ const Content = () => {
             <input
               type="text"
               id="subject"
-              max={40}
+              maxLength={40}
               value={input.subject}
               onChange={handleInputChange}
+              placeholder="(max 40)"
             />
             <label htmlFor="description">Description: </label>
-            <input
-              type="text"
+            <textarea
               id="description"
-              max={80}
+              placeholder="(max 80)"
+              maxLength={80}
               value={input.description}
               onChange={handleInputChange}
+              aria-disabled
             />
             <label htmlFor="category">Category: </label>
             <input
               type="text"
               id="category"
-              max={25}
+              placeholder="(max 25)"
+              maxLength={25}
               value={input.category}
               onChange={handleInputChange}
             />
@@ -101,10 +111,18 @@ const Content = () => {
             <input
               type="text"
               id="picture"
+              placeholder="link"
               value={input.picture}
               onChange={handleInputChange}
             />
-            <button onClick={() => addingNew()}>Add</button>
+            <div id="btns">
+              <button id="addBtn" onClick={() => addingNew()}>
+                Add
+              </button>
+              <button id="addBtn" onClick={() => setVisible(false)}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
